@@ -19,6 +19,7 @@ class Process extends Model
         'gasoline_from_account',
         'gasoline_for_cash',
         'spare_parts',
+        'comments',
         'created_at',
         'updated_at',
     ];

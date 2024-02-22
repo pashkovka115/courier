@@ -11,6 +11,7 @@
             <th>Заправка со<br>счёта парка</th>
             <th>Заправка<br>за свои</th>
             <th>Запчасти</th>
+            <th>Комментарий</th>
             <th></th>
         </tr>
         @foreach($data as $datum)
@@ -28,9 +29,10 @@
                 <td>{{ number_format((float)$datum->gasoline_from_account, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->gasoline_for_cash, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->spare_parts, 2, ',', ' ') }}</td>
+                <td>{!! $datum->comments !!}</td>
                 <td>
                     <a href="{{ route('front.home.destroy', ['id' => $datum->id]) }}" class="btn btn-danger float-end"
-                    onclick="return confirm('Удалить?')">Удалить</a>
+                       onclick="return confirm('Удалить?')">Удалить</a>
                     <a href="{{ route('front.home.edit', ['id' => $datum->id]) }}" class="btn btn-info float-end">Редактировать</a>
                 </td>
             </tr>
@@ -85,6 +87,11 @@
                 <input name="spare_parts" class="form-control" list="datalistOptions" id="inputPassword7">
             </div>
 
+            <div class="col-md-2">
+                <label for="inputPassword8" class="form-label">Комментарий</label>
+                <textarea name="comments" class="form-control" list="datalistOptions" id="inputPassword8"></textarea>
+            </div>
+
         </div>
 
         <div class="row mt-3">
@@ -112,7 +119,7 @@
                      'ноябрь',
                      'декабрь'
                    ];
-  @endphp
+                @endphp
                 <caption><b>Данные за {{ $arr[date('n')-1] }} месяц</b></caption>
                 <tr>
                     <th>Заработано</th>

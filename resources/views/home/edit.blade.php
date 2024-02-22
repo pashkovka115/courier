@@ -10,17 +10,20 @@
 
             <div class="col-md-1">
                 <label for="inputPassword1" class="form-label">Дата</label>
-                <input name="date" type="date" class="form-control" list="datalistOptions" id="inputPassword1" required value="{{ $data->date }}">
+                <input name="date" type="date" class="form-control" list="datalistOptions" id="inputPassword1" required
+                       value="{{ $data->date }}">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Заработал</label>
-                <input name="earned" class="form-control" list="datalistOptions" id="inputPassword2" value="{{ $data->earned }}">
+                <input name="earned" class="form-control" list="datalistOptions" id="inputPassword2"
+                       value="{{ $data->earned }}">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword3" class="form-label">Поступило на карту</label>
-                <input name="salary" class="form-control" list="datalistOptions" id="inputPassword3" value="{{ $data->salary }}">
+                <input name="salary" class="form-control" list="datalistOptions" id="inputPassword3"
+                       value="{{ $data->salary }}">
             </div>
 
             <div class="col-md-1">
@@ -45,6 +48,12 @@
                 <label for="inputPassword7" class="form-label">Запчасти</label>
                 <input name="spare_parts" class="form-control" list="datalistOptions" id="inputPassword7"
                        value="{{ $data->spare_parts }}">
+            </div>
+
+            <div class="col-md-2">
+                <label for="inputPassword8" class="form-label">Комментарий</label>
+                <input name="comments" class="form-control" list="datalistOptions" id="inputPassword8"
+                       value="{{ $data->comments }}">
             </div>
 
         </div>

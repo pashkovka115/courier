@@ -23,8 +23,8 @@ class ProcessController extends Controller
 
         $d = Process::where('date', 'like', $like_date)->get();
         $days = 0;
-        foreach ($d as $item){
-            if ((int)$item->earned > 0){
+        foreach ($d as $item) {
+            if ((int)$item->earned > 0) {
                 $days++;
             }
         }
@@ -38,8 +38,8 @@ class ProcessController extends Controller
 
         $d2 = Process::get('earned');
         $days2 = 0;
-        foreach ($d2 as $item2){
-            if ((int)$item2->earned > 0){
+        foreach ($d2 as $item2) {
+            if ((int)$item2->earned > 0) {
                 $days2++;
             }
         }
@@ -97,6 +97,7 @@ class ProcessController extends Controller
             "gasoline_from_account" => ['nullable', 'string'],
             "gasoline_for_cash" => ['nullable', 'string'],
             "spare_parts" => ['nullable', 'string'],
+            "comments" => ['nullable', 'string'],
         ]);
 
         Process::create($data);
@@ -130,6 +131,7 @@ class ProcessController extends Controller
             "gasoline_from_account" => ['nullable', 'string'],
             "gasoline_for_cash" => ['nullable', 'string'],
             "spare_parts" => ['nullable', 'string'],
+            "comments" => ['nullable', 'string'],
         ]);
 
         Process::where('id', $data['id'])->update($data);
