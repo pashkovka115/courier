@@ -30,7 +30,7 @@
                 <td>{{ number_format((float)$datum->gasoline_for_cash, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->spare_parts, 2, ',', ' ') }}</td>
                 <td>{!! $datum->comments !!}</td>
-                <td>
+                <td style="width: 240px">
                     <a href="{{ route('front.home.destroy', ['id' => $datum->id]) }}" class="btn btn-danger float-end"
                        onclick="return confirm('Удалить?')">Удалить</a>
                     <a href="{{ route('front.home.edit', ['id' => $datum->id]) }}" class="btn btn-info float-end">Редактировать</a>
