@@ -5,6 +5,7 @@
         <tr>
             <th>№№</th>
             <th>Дата</th>
+            <th>День недели</th>
             <th>Заработал</th>
             <th>Поступило<br>на карту</th>
             <th>Комиссия<br>парка</th>
@@ -23,6 +24,7 @@
             <tr title="ID-{{ $datum->id }}">
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $datum->date)->format('d-m-Y') }}</td>
+                <td>{{ $datum->day_week }}</td>
                 <td style="background-color: {{ $style }}; color: white">{{ number_format((float)$datum->earned, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->salary, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->park_commission, 2, ',', ' ') }}</td>
@@ -52,6 +54,19 @@
             <div class="col-md-1">
                 <label for="inputPassword1" class="form-label">Дата</label>
                 <input name="date" type="date" class="form-control" list="datalistOptions" id="inputPassword1" required>
+            </div>
+
+            <div class="col-md-1">
+                <label for="select_week" class="form-label">День недели</label>
+                <select name="day_week" class="form-select" aria-label="select_week">
+                    <option value="Пн">Пн</option>
+                    <option value="Вт">Вт</option>
+                    <option value="Ср">Ср</option>
+                    <option value="Чт">Чт</option>
+                    <option value="Пт">Пт</option>
+                    <option value="Сб">Сб</option>
+                    <option value="Вс">Вс</option>
+                </select>
             </div>
 
             <div class="col-md-1">

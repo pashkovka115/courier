@@ -13,6 +13,7 @@ class Process extends Model
 //    public $timestamps = false;
     protected $fillable = [
         'date',
+        'day_week',
         'earned',
         'salary',
         'park_commission',

@@ -15,6 +15,19 @@
             </div>
 
             <div class="col-md-1">
+                <label for="inputPassword1" class="form-label">День недели</label>
+                <select name="day_week" class="form-select">
+                    <option value="Пн" @if($data->day_week == 'Пн') selected @endif>Пн</option>
+                    <option value="Вт" @if($data->day_week == 'Вт') selected @endif>Вт</option>
+                    <option value="Ср" @if($data->day_week == 'Ср') selected @endif>Ср</option>
+                    <option value="Чт" @if($data->day_week == 'Чт') selected @endif>Чт</option>
+                    <option value="Пт" @if($data->day_week == 'Пт') selected @endif>Пт</option>
+                    <option value="Сб" @if($data->day_week == 'Сб') selected @endif>Сб</option>
+                    <option value="Вс" @if($data->day_week == 'Вс') selected @endif>Вс</option>
+                </select>
+            </div>
+
+            <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Заработал</label>
                 <input name="earned" class="form-control" list="datalistOptions" id="inputPassword2"
                        value="{{ $data->earned }}">

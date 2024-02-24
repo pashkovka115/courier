@@ -91,6 +91,7 @@ class ProcessController extends Controller
     {
         $data = $request->validate([
             "date" => ['string'],
+            "day_week" => ['string'],
             "earned" => ['nullable', 'string'],
             "salary" => ['nullable', 'string'],
             "park_commission" => ['nullable', 'string'],
@@ -125,6 +126,7 @@ class ProcessController extends Controller
         $data = $request->validate([
             'id' => ['string'],
             "date" => ['string'],
+            "day_week" => ['string'],
             "earned" => ['nullable', 'string'],
             "salary" => ['nullable', 'string'],
             "park_commission" => ['nullable', 'string'],
