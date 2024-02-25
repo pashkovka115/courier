@@ -7,6 +7,8 @@
             <th>Дата</th>
             <th>День недели</th>
             <th>Заработал</th>
+            <th>Бонусы</th>
+            <th>Чай</th>
             <th>Поступило<br>на карту</th>
             <th>Комиссия<br>парка</th>
             <th>Заправка со<br>счёта парка</th>
@@ -15,7 +17,8 @@
             <th>Комментарий</th>
             <th></th>
         </tr>
-        @foreach($data as $datum)
+        @php $page_data = $data->sortBy('date'); @endphp
+        @foreach($page_data as $datum)
             @php if ((float)$datum->earned > 0){
      $style = 'green';
  }else{
@@ -26,6 +29,8 @@
                 <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $datum->date)->format('d-m-Y') }}</td>
                 <td>{{ $datum->day_week }}</td>
                 <td style="background-color: {{ $style }}; color: white">{{ number_format((float)$datum->earned, 2, ',', ' ') }}</td>
+                <td>{{ number_format((float)$datum->bonus, 2, ',', ' ') }}</td>
+                <td>{{ number_format((float)$datum->tea, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->salary, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->park_commission, 2, ',', ' ') }}</td>
                 <td>{{ number_format((float)$datum->gasoline_from_account, 2, ',', ' ') }}</td>
@@ -71,35 +76,45 @@
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Заработал</label>
-                <input name="earned" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+                <input name="earned" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+            </div>
+
+            <div class="col-md-1">
+                <label for="inputPassword2" class="form-label">Бонус</label>
+                <input name="bonus" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+            </div>
+
+            <div class="col-md-1">
+                <label for="inputPassword2" class="form-label">Чай</label>
+                <input name="tea" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword3" class="form-label">Поступило на карту</label>
-                <input name="salary" class="form-control" list="datalistOptions" id="inputPassword3" value="">
+                <input name="salary" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword3" value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword4" class="form-label">Комиссия парка</label>
-                <input name="park_commission" class="form-control" list="datalistOptions" id="inputPassword4"
+                <input name="park_commission" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword4"
                        value="40">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword5" class="form-label">Заправка со счёта парка</label>
-                <input name="gasoline_from_account" class="form-control" list="datalistOptions" id="inputPassword5"
+                <input name="gasoline_from_account" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword5"
                        value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword6" class="form-label">Заправка за свои</label>
-                <input name="gasoline_for_cash" class="form-control" list="datalistOptions" id="inputPassword6"
+                <input name="gasoline_for_cash" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword6"
                        value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword7" class="form-label">Запчасти</label>
-                <input name="spare_parts" class="form-control" list="datalistOptions" id="inputPassword7">
+                <input name="spare_parts" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword7">
             </div>
 
             <div class="col-md-2">
@@ -115,6 +130,8 @@
             </div>
         </div>
     </form>
+
+    <hr>
 
     <div class="row mt-3">
         <div class="col-md-12">
@@ -138,6 +155,8 @@
                 <caption><b>Данные за {{ $arr[date('n')-1] }} месяц</b></caption>
                 <tr>
                     <th>Заработано</th>
+                    <th>Бонусы</th>
+                    <th>Чай</th>
                     <th>Топливо с аккаунта</th>
                     <th>Топливо за свои</th>
                     <th>Топливо всего</th>
@@ -146,11 +165,13 @@
                     <th>Поступило на карту</th>
                     <th>Средний в день</th>
                     <th>Дней отр.</th>
-                    <th>Итого чистыми</th>
+                    <th>Итого чистыми<br>до уплаты налогов</th>
                 </tr>
                 <tr>
-                    @php $e = $ears - $gas - $coms - $spare_parts; @endphp
+                    @php $e = $ears - $gas - $coms - $spare_parts + $bonuses + $tea; @endphp
                     <td>{{ number_format($ears, 2, ',', ' ') }}</td>
+                    <td>{{ number_format($bonuses, 2, ',', ' ') }}</td>
+                    <td>{{ number_format($tea, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas_from_account, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas_for_cash, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas, 2, ',', ' ') }}</td>
@@ -171,6 +192,8 @@
                 <caption><b>Данные за всё время работы</b></caption>
                 <tr>
                     <th>Заработано</th>
+                    <th>Бонусы</th>
+                    <th>Чай</th>
                     <th>Топливо с аккаунта</th>
                     <th>Топливо за свои</th>
                     <th>Топливо всего</th>
@@ -179,11 +202,13 @@
                     <th>Поступило на карту</th>
                     <th>Средний в день</th>
                     <th>Дней отр.</th>
-                    <th>Итого чистыми</th>
+                    <th>Итого чистыми<br>до уплаты налогов</th>
                 </tr>
                 <tr>
-                    @php $e2 = $ears2 - $gas2 - $coms2 - $spare_parts2; @endphp
+                    @php $e2 = $ears2 - $gas2 - $coms2 - $spare_parts2 + $bonuses2 + $tea2; @endphp
                     <td>{{ number_format($ears2, 2, ',', ' ') }}</td>
+                    <td>{{ number_format($bonuses2, 2, ',', ' ') }}</td>
+                    <td>{{ number_format($tea2, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas_from_account2, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas_for_cash2, 2, ',', ' ') }}</td>
                     <td>{{ number_format($gas2, 2, ',', ' ') }}</td>
@@ -192,7 +217,7 @@
                     <td>{{ number_format($salarys2, 2, ',', ' ') }}</td>
                     <td>{{ number_format($e2 / $days2, 2, ',', ' ') }}</td>
                     <td>{{ $days2 }}</td>
-                    <td>{{ number_format($ears2 - $gas2 - $coms2 - $spare_parts2, 2, ',', ' ') }}</td>
+                    <td>{{ number_format($e2, 2, ',', ' ') }}</td>
                 </tr>
             </table>
         </div>

@@ -20,6 +20,8 @@ class ProcessController extends Controller
         $gas_for_cash = Process::where('date', 'like', $like_date)->sum('gasoline_for_cash');
         $gas = $gas_for_cash + $gas_from_account;
         $spare_parts = Process::where('date', 'like', $like_date)->sum('spare_parts');
+        $bonuses = Process::where('date', 'like', $like_date)->sum('bonus');
+        $tea = Process::where('date', 'like', $like_date)->sum('tea');
 
         $d = Process::where('date', 'like', $like_date)->get();
         $days = 0;
@@ -35,6 +37,8 @@ class ProcessController extends Controller
         $gas_for_cash2 = Process::sum('gasoline_for_cash');
         $gas2 = $gas_for_cash2 + $gas_from_account2;
         $spare_parts2 = Process::sum('spare_parts');
+        $bonuses2 = Process::sum('bonus');
+        $tea2 = Process::sum('tea');
 
         $d2 = Process::get('earned');
         $days2 = 0;
@@ -65,6 +69,10 @@ class ProcessController extends Controller
             'salarys2',
             'ears',
             'ears2',
+            'bonuses',
+            'bonuses2',
+            'tea',
+            'tea2',
             'gas_from_account',
             'gas_from_account2',
             'gas_for_cash',
@@ -93,6 +101,8 @@ class ProcessController extends Controller
             "date" => ['string'],
             "day_week" => ['string'],
             "earned" => ['nullable', 'string'],
+            "bonus" => ['nullable', 'string'],
+            "tea" => ['nullable', 'string'],
             "salary" => ['nullable', 'string'],
             "park_commission" => ['nullable', 'string'],
             "gasoline_from_account" => ['nullable', 'string'],
@@ -128,6 +138,8 @@ class ProcessController extends Controller
             "date" => ['string'],
             "day_week" => ['string'],
             "earned" => ['nullable', 'string'],
+            "bonus" => ['nullable', 'string'],
+            "tea" => ['nullable', 'string'],
             "salary" => ['nullable', 'string'],
             "park_commission" => ['nullable', 'string'],
             "gasoline_from_account" => ['nullable', 'string'],

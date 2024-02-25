@@ -29,44 +29,64 @@
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Заработал</label>
-                <input name="earned" class="form-control" list="datalistOptions" id="inputPassword2"
+                <input name="earned" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword2"
                        value="{{ $data->earned }}">
+            </div>
+
+            <div class="col-md-1">
+                <label for="inputPassword22" class="form-label">Бонусы</label>
+                <input name="bonus" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword22"
+                       value="{{ $data->bonus }}">
+            </div>
+
+            <div class="col-md-1">
+                <label for="inputPassword23" class="form-label">Чай</label>
+                <input name="tea" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword23"
+                       value="{{ $data->tea }}">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword3" class="form-label">Поступило на карту</label>
-                <input name="salary" class="form-control" list="datalistOptions" id="inputPassword3"
+                <input name="salary" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword3"
                        value="{{ $data->salary }}">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword4" class="form-label">Комиссия парка</label>
-                <input name="park_commission" class="form-control" list="datalistOptions" id="inputPassword4"
+                <input name="park_commission" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword4"
                        value="{{ $data->park_commission }}">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword5" class="form-label">Заправка со счёта парка</label>
-                <input name="gasoline_from_account" class="form-control" list="datalistOptions" id="inputPassword5"
+                <input name="gasoline_from_account" type="number" step="0.01" class="form-control"
+                       list="datalistOptions" id="inputPassword5"
                        value="{{ $data->gasoline_from_account }}">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword6" class="form-label">Заправка за свои</label>
-                <input name="gasoline_for_cash" class="form-control" list="datalistOptions" id="inputPassword6"
+                <input name="gasoline_for_cash" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword6"
                        value="{{ $data->gasoline_for_cash }}">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword7" class="form-label">Запчасти</label>
-                <input name="spare_parts" class="form-control" list="datalistOptions" id="inputPassword7"
+                <input name="spare_parts" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword7"
                        value="{{ $data->spare_parts }}">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword8" class="form-label">Комментарий</label>
-                <input name="comments" class="form-control" list="datalistOptions" id="inputPassword8"
-                       value="{{ $data->comments }}">
+                <textarea name="comments" class="form-control" list="datalistOptions"
+                          id="inputPassword8">{{ $data->comments }}</textarea>
             </div>
 
         </div>
