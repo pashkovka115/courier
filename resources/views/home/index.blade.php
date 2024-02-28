@@ -1,7 +1,21 @@
 @extends('layouts/index')
 
 @section('content')
+    <style>
+        .table-header-fixed table {
+            overflow-y: auto;
+            height: 50vh;     /* !!!  HEIGHT MUST BE IN [ vh ] !!! */
+        }
+
+        .table-header-fixed thead th {
+            background-color: white;
+            position: sticky;
+            top: 0;
+        }
+    </style>
+    <div class="table-header-fixed">
     <table class="table table-striped">
+        <thead>
         <tr>
             <th>№№</th>
             <th>Дата</th>
@@ -17,7 +31,9 @@
             <th>Комментарий</th>
             <th></th>
         </tr>
+        </thead>
         @php $page_data = $data->sortBy('date'); @endphp
+        <tbody>
         @foreach($page_data as $datum)
             @php if ((float)$datum->earned > 0){
      $style = 'green';
@@ -44,7 +60,9 @@
                 </td>
             </tr>
         @endforeach
+        </tbody>
     </table>
+    </div>
     <div class="d-flex">
         {!! $data->links() !!}
     </div>
