@@ -196,7 +196,7 @@
                     <td>{{ number_format($coms, 2, ',', ' ') }}</td>
                     <td>{{ number_format($spare_parts, 2, ',', ' ') }}</td>
                     <td>{{ number_format($salarys, 2, ',', ' ') }}</td>
-                    <td>{{ number_format($e / $days, 2, ',', ' ') }}</td>
+                    <td>@if($days != 0) {{ number_format($e / $days, 2, ',', ' ') }}@else 0 @endif</td>
                     <td>{{ $days }}</td>
                     <td>{{ number_format($e, 2, ',', ' ') }}</td>
                 </tr>
