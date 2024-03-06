@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Process;
 use App\Http\Requests\StoreprocessRequest;
 use App\Http\Requests\UpdateprocessRequest;
+use Illuminate\Http\Request;
 
 class ProcessController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = Process::orderBy('date', 'desc')->paginate(30);
+        if ($request->has('show_month')){
+            $data = Process::where('date', 'like', '%'.$request->input('show_month').'%')->orderBy('date', 'desc')->paginate(31);
+        }else{
+            $data = Process::orderBy('date', 'desc')->paginate(31);
+        }
+
+        $date_all = Process::get('date');
 
         $like_date = '%' . date('Y') . '-' . date('m') . '%';
 
@@ -62,6 +69,7 @@ class ProcessController extends Controller
         $salarys2 = Process::sum('salary');
 
         return view('home.index', compact(
+            'date_all',
             'data',
             'cash',
             'cash2',

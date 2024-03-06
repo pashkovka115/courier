@@ -16,6 +16,8 @@ class Process extends Model
         'day_week',
         'earned',
         'salary',
+        'bonus',
+        'tea',
         'park_commission',
         'gasoline_from_account',
         'gasoline_for_cash',

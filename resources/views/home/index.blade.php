@@ -4,7 +4,7 @@
     <style>
         .table-header-fixed table {
             overflow-y: auto;
-            height: 50vh;     /* !!!  HEIGHT MUST BE IN [ vh ] !!! */
+            height: 50vh; /* !!!  HEIGHT MUST BE IN [ vh ] !!! */
         }
 
         .table-header-fixed thead th {
@@ -14,59 +14,95 @@
         }
     </style>
     <div class="table-header-fixed">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>№№</th>
-            <th>Дата</th>
-            <th>День недели</th>
-            <th>Заработал</th>
-            <th>Бонусы</th>
-            <th>Чай</th>
-            <th>Поступило<br>на карту</th>
-            <th>Комиссия<br>парка</th>
-            <th>Заправка со<br>счёта парка</th>
-            <th>Заправка<br>за свои</th>
-            <th>Запчасти</th>
-            <th>Комментарий</th>
-            <th></th>
-        </tr>
-        </thead>
-        @php $page_data = $data->sortBy('date'); @endphp
-        <tbody>
-        @foreach($page_data as $datum)
-            @php if ((float)$datum->earned > 0){
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>№№</th>
+                <th>Дата</th>
+                <th>День недели</th>
+                <th>Заработал</th>
+                <th>Бонусы</th>
+                <th>Чай</th>
+                <th>Поступило<br>на карту</th>
+                <th>Комиссия<br>парка</th>
+                <th>Заправка со<br>счёта парка</th>
+                <th>Заправка<br>за свои</th>
+                <th>Запчасти</th>
+                <th>Комментарий</th>
+                <th></th>
+            </tr>
+            </thead>
+            @php $page_data = $data->sortBy('date'); @endphp
+            <tbody>
+            @foreach($page_data as $datum)
+                @php if ((float)$datum->earned > 0){
      $style = 'green';
  }else{
      $style = 'red';
  } @endphp
-            <tr title="ID-{{ $datum->id }}">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $datum->date)->format('d-m-Y') }}</td>
-                <td>{{ $datum->day_week }}</td>
-                <td style="background-color: {{ $style }}; color: white">{{ number_format((float)$datum->earned, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->bonus, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->tea, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->salary, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->park_commission, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->gasoline_from_account, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->gasoline_for_cash, 2, ',', ' ') }}</td>
-                <td>{{ number_format((float)$datum->spare_parts, 2, ',', ' ') }}</td>
-                <td>{!! $datum->comments !!}</td>
-                <td style="width: 240px">
-                    <a href="{{ route('front.home.destroy', ['id' => $datum->id]) }}" class="btn btn-danger float-end"
-                       onclick="return confirm('Удалить?')">Удалить</a>
-                    <a href="{{ route('front.home.edit', ['id' => $datum->id]) }}" class="btn btn-info float-end">Редактировать</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+                <tr title="ID-{{ $datum->id }}">
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $datum->date)->format('d-m-Y') }}</td>
+                    <td>{{ $datum->day_week }}</td>
+                    <td style="background-color: {{ $style }}; color: white">{{ number_format((float)$datum->earned, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->bonus, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->tea, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->salary, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->park_commission, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->gasoline_from_account, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->gasoline_for_cash, 2, ',', ' ') }}</td>
+                    <td>{{ number_format((float)$datum->spare_parts, 2, ',', ' ') }}</td>
+                    <td>{!! $datum->comments !!}</td>
+                    <td style="width: 240px">
+                        <a href="{{ route('front.home.destroy', ['id' => $datum->id]) }}"
+                           class="btn btn-danger float-end"
+                           onclick="return confirm('Удалить?')">Удалить</a>
+                        <a href="{{ route('front.home.edit', ['id' => $datum->id]) }}" class="btn btn-info float-end">Редактировать</a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
     <div class="d-flex">
         {!! $data->links() !!}
     </div>
-
+    <hr>
+    <figure>
+        <blockquote class="blockquote">
+            <p>Пагинация по месяцам</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Доступный временной промежуток <cite title="Source Title">от <b>
+                    <?php $dt1 = \Carbon\Carbon::createFromFormat('Y-m-d', $date_all->min('date'));
+                    echo $dt1->format('d.m.Y');
+                    ?></b> по <b><?php
+                                 $dt2 = \Carbon\Carbon::createFromFormat('Y-m-d', $date_all->max('date'));
+                                 echo $dt2->format('d.m.Y'); ?></b>
+            </cite>
+        </figcaption>
+    </figure>
+    <form class="row" action="{{ route('front.home.index') }}">
+        <div class="mt-3 col-2">
+            <label for="datePagination" class="form-label">За какой месяц показать</label>
+            <input
+                type="month"
+                min="{{ $dt1->format('Y-m') }}"
+                max="{{ $dt2->format('Y-m') }}"
+                name="show_month"
+                class="form-control"
+                id="datePagination">
+        </div>
+        <div class="col-2 mt-5">
+            <button type="submit" class="btn btn-success mb-3">Показать</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-2">
+            <a href="{{ route('front.home.index') }}" class="btn btn-info mb-3">Сбросить</a>
+        </div>
+    </div>
+    <hr>
     <p></p>
 
     <h5>Добавить строку</h5>
@@ -94,45 +130,53 @@
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Заработал</label>
-                <input name="earned" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+                <input name="earned" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword2" value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Бонус</label>
-                <input name="bonus" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+                <input name="bonus" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword2" value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword2" class="form-label">Чай</label>
-                <input name="tea" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword2" value="">
+                <input name="tea" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword2" value="">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword3" class="form-label">Поступило на карту</label>
-                <input name="salary" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword3" value="">
+                <input name="salary" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword3" value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword4" class="form-label">Комиссия парка</label>
-                <input name="park_commission" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword4"
+                <input name="park_commission" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword4"
                        value="40">
             </div>
 
             <div class="col-md-2">
                 <label for="inputPassword5" class="form-label">Заправка со счёта парка</label>
-                <input name="gasoline_from_account" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword5"
+                <input name="gasoline_from_account" type="number" step="0.01" class="form-control"
+                       list="datalistOptions" id="inputPassword5"
                        value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword6" class="form-label">Заправка за свои</label>
-                <input name="gasoline_for_cash" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword6"
+                <input name="gasoline_for_cash" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword6"
                        value="">
             </div>
 
             <div class="col-md-1">
                 <label for="inputPassword7" class="form-label">Запчасти</label>
-                <input name="spare_parts" type="number" step="0.01" class="form-control" list="datalistOptions" id="inputPassword7">
+                <input name="spare_parts" type="number" step="0.01" class="form-control" list="datalistOptions"
+                       id="inputPassword7">
             </div>
 
             <div class="col-md-2">
@@ -196,7 +240,11 @@
                     <td>{{ number_format($coms, 2, ',', ' ') }}</td>
                     <td>{{ number_format($spare_parts, 2, ',', ' ') }}</td>
                     <td>{{ number_format($salarys, 2, ',', ' ') }}</td>
-                    <td>@if($days != 0) {{ number_format($e / $days, 2, ',', ' ') }}@else 0 @endif</td>
+                    <td>@if($days != 0)
+                            {{ number_format($e / $days, 2, ',', ' ') }}
+                        @else
+                            0
+                        @endif</td>
                     <td>{{ $days }}</td>
                     <td>{{ number_format($e, 2, ',', ' ') }}</td>
                 </tr>
