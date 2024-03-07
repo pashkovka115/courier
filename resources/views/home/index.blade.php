@@ -96,12 +96,11 @@
         <div class="col-2 mt-5">
             <button type="submit" class="btn btn-success mb-3">Показать</button>
         </div>
-    </form>
-    <div class="row">
-        <div class="col-2">
-            <a href="{{ route('front.home.index') }}" class="btn btn-info mb-3">Сбросить</a>
+        <div class="col-2 mt-5" style="margin-left: -190px">
+            <a href="{{ route('front.home.index') }}" class="btn btn-info mb-3 text-white">Сбросить</a>
         </div>
-    </div>
+    </form>
+
     <hr>
     <p></p>
 
@@ -146,7 +145,7 @@
                        id="inputPassword2" value="">
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1 text-center" style="margin-top: -7px">
                 <label for="inputPassword3" class="form-label">Поступило на карту</label>
                 <input name="salary" type="number" step="0.01" class="form-control" list="datalistOptions"
                        id="inputPassword3" value="">
@@ -159,7 +158,7 @@
                        value="40">
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1 text-center" style="margin-top: -7px">
                 <label for="inputPassword5" class="form-label">Заправка со счёта парка</label>
                 <input name="gasoline_from_account" type="number" step="0.01" class="form-control"
                        list="datalistOptions" id="inputPassword5"

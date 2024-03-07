@@ -12,10 +12,11 @@ class ProcessController extends Controller
     public function index(Request $request)
     {
         if ($request->has('show_month')){
-            $data = Process::where('date', 'like', '%'.$request->input('show_month').'%')->orderBy('date', 'desc')->paginate(31);
+            $data = Process::where('date', 'like', '%'.$request->input('show_month').'%')->orderBy('date', 'desc');
         }else{
-            $data = Process::orderBy('date', 'desc')->paginate(31);
+            $data = Process::orderBy('date', 'desc');
         }
+        $data = $data->paginate(31);
 
         $date_all = Process::get('date');
 
