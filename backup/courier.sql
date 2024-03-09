@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 07 2024 г., 19:48
+-- Время создания: Мар 09 2024 г., 20:34
 -- Версия сервера: 5.7.39
 -- Версия PHP: 8.1.9
 
@@ -71,7 +71,9 @@ INSERT INTO `processes` (`id`, `date`, `earned`, `salary`, `park_commission`, `g
 (20, '2024-03-04', '839.84', NULL, '40', NULL, '399.67', '2024-03-04 07:20:01', '2024-03-04 17:33:54', NULL, NULL, 'Пн', NULL, '300'),
 (21, '2024-03-05', '4262.31', '900', '40', NULL, '500', '2024-03-05 16:38:56', '2024-03-05 16:40:13', NULL, NULL, 'Вт', '1100', NULL),
 (22, '2024-03-06', NULL, '4050', NULL, NULL, NULL, '2024-03-06 09:07:29', '2024-03-06 09:07:29', NULL, NULL, 'Ср', NULL, NULL),
-(23, '2024-03-07', '1665.74', NULL, '40', NULL, '279.43', '2024-03-07 09:02:48', '2024-03-07 09:02:48', NULL, NULL, 'Чт', NULL, NULL);
+(23, '2024-03-07', '1665.74', '1350', '40', NULL, '279.43', '2024-03-07 09:02:48', '2024-03-07 15:14:09', NULL, NULL, 'Чт', NULL, NULL),
+(24, '2024-03-08', NULL, '4300', NULL, NULL, NULL, '2024-03-08 13:45:26', '2024-03-08 13:45:26', NULL, NULL, 'Пт', NULL, NULL),
+(25, '2024-03-09', '2162.65', '1600', '40', NULL, '167.10', '2024-03-09 14:30:00', '2024-03-09 14:30:00', NULL, NULL, 'Сб', NULL, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -91,7 +93,7 @@ ALTER TABLE `processes`
 -- AUTO_INCREMENT для таблицы `processes`
 --
 ALTER TABLE `processes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

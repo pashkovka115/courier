@@ -89,6 +89,7 @@
                 type="month"
                 min="{{ $dt1->format('Y-m') }}"
                 max="{{ $dt2->format('Y-m') }}"
+                value="{{ $dt2->format('Y-m') }}"
                 name="show_month"
                 class="form-control"
                 id="datePagination">
@@ -97,7 +98,7 @@
             <button type="submit" class="btn btn-success mb-3">Показать</button>
         </div>
         <div class="col-2 mt-5" style="margin-left: -190px">
-            <a href="{{ route('front.home.index') }}" class="btn btn-info mb-3 text-white">Сбросить</a>
+            <a href="{{ route('front.home.index') }}" class="btn btn-dark mb-3 text-white">Сбросить</a>
         </div>
     </form>
 
