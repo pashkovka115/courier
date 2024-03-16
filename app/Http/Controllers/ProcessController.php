@@ -20,7 +20,16 @@ class ProcessController extends Controller
 
         $date_all = Process::get('date');
 
-        $like_date = '%' . date('Y') . '-' . date('m') . '%';
+        if ($request->has('show_month')) {
+            $like_date = '%' . $request->input('show_month') . '%';
+            $current_month = explode('-', $request->input('show_month'));
+            if (count($current_month) > 1){
+                $current_month = (int)$current_month[1] - 1;
+            }
+        }else{
+            $like_date = '%' . date('Y') . '-' . date('m') . '%';
+            $current_month = (date('n')-1);
+        }
 
         $ears = Process::where('date', 'like', $like_date)->sum('earned');
         $coms = Process::where('date', 'like', $like_date)->sum('park_commission');
@@ -94,14 +103,9 @@ class ProcessController extends Controller
             'spare_parts2',
             'days',
             'days2',
+            'current_month'
         ));
     }
-
-
-    /*public function create()
-    {
-        //
-    }*/
 
 
     public function store(StoreprocessRequest $request)
@@ -124,12 +128,6 @@ class ProcessController extends Controller
 
         return back();
     }
-
-
-    /*public function show(Process $process)
-    {
-        //
-    }*/
 
 
     public function edit($id)

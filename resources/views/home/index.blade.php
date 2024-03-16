@@ -214,7 +214,7 @@
                      'декабрь'
                    ];
                 @endphp
-                <caption><b>Данные за {{ $arr[date('n')-1] }} месяц</b></caption>
+                <caption><b>Данные за {{ $arr[$current_month] }} месяц</b></caption>
                 <tr>
                     <th>Заработано</th>
                     <th>Бонусы</th>
